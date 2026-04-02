@@ -36,16 +36,16 @@ class TestLeafNode(unittest.TestCase):
         self.assertEqual(node.to_html(), "Hello, world!")
 
     def test_leaf_to_html_img(self):
-        node = LeafNode("img", "This is an image", {"src": "url/of/image.jpg", "alt":"Description of image"})
-        self.assertEqual(node.to_html(), '<img src="url/of/image.jpg" alt="Description of image">This is an image</img>')
+        node = LeafNode("img", "", {"src": "url/of/image.jpg", "alt":"Description of image"})
+        self.assertEqual(node.to_html(), '<img src="url/of/image.jpg" alt="Description of image"></img>')
 
     def test_leaf_repr(self):
         node = LeafNode("p", "Hello, world!")
         node2 = LeafNode(None, "Hello, world!")
-        node3 = LeafNode("img", "This is an image", {"src": "url/of/image.jpg", "alt":"Description of image"})
+        node3 = LeafNode("img", "", {"src": "url/of/image.jpg", "alt":"Description of image"})
         self.assertEqual(node.__repr__(), 'Tag: p, Value: Hello, world!, Props: ')
         self.assertEqual(node2.__repr__(), 'Tag: None, Value: Hello, world!, Props: ')
-        self.assertEqual(node3.__repr__(), 'Tag: img, Value: This is an image, Props: src="url/of/image.jpg" alt="Description of image"')
+        self.assertEqual(node3.__repr__(), 'Tag: img, Value: , Props: src="url/of/image.jpg" alt="Description of image"')
 
     def test_leaf_value_error(self):
         node = LeafNode("p", None)
