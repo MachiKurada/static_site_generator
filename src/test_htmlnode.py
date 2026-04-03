@@ -13,8 +13,8 @@ class TestHTMLNode(unittest.TestCase):
         node = HTMLNode("a", "this is a link", None, {"href": "https://www.url.com"})
         node2 = HTMLNode("a", "this is a link with several props", None, {"href": "https://www.url.com", "target": "_blank"})
         node3 = HTMLNode("b", "bold")
-        self.assertEqual(node.props_to_html(), 'href="https://www.url.com"')
-        self.assertEqual(node2.props_to_html(), 'href="https://www.url.com" target="_blank"')
+        self.assertEqual(node.props_to_html(), ' href="https://www.url.com"')
+        self.assertEqual(node2.props_to_html(), ' href="https://www.url.com" target="_blank"')
         self.assertEqual(node3.props_to_html(), '')
 
     def test_repr(self):
@@ -23,7 +23,7 @@ class TestHTMLNode(unittest.TestCase):
         node3 = HTMLNode("b", "bold", [node])
         self.assertEqual(node.__repr__(), 'Tag: a, Value: this is a link, Children: , Props: href="https://www.url.com"')
         self.assertEqual(node2.__repr__(), 'Tag: a, Value: this is a link with several props, Children: , Props: href="https://www.url.com" target="_blank"')
-        self.assertEqual(node3.__repr__(), 'Tag: b, Value: bold, Children: this is a link, Props: ')
+        self.assertEqual(node3.__repr__(), 'Tag: b, Value: bold, Children: this is a link, Props:')
 
 
 class TestLeafNode(unittest.TestCase):
@@ -43,8 +43,8 @@ class TestLeafNode(unittest.TestCase):
         node = LeafNode("p", "Hello, world!")
         node2 = LeafNode(None, "Hello, world!")
         node3 = LeafNode("img", "", {"src": "url/of/image.jpg", "alt":"Description of image"})
-        self.assertEqual(node.__repr__(), 'Tag: p, Value: Hello, world!, Props: ')
-        self.assertEqual(node2.__repr__(), 'Tag: None, Value: Hello, world!, Props: ')
+        self.assertEqual(node.__repr__(), 'Tag: p, Value: Hello, world!, Props:')
+        self.assertEqual(node2.__repr__(), 'Tag: None, Value: Hello, world!, Props:')
         self.assertEqual(node3.__repr__(), 'Tag: img, Value: , Props: src="url/of/image.jpg" alt="Description of image"')
 
     def test_leaf_value_error(self):

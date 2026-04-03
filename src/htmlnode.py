@@ -13,8 +13,8 @@ class HTMLNode:
         if self.props is None or len(self.props) == 0:
             return attributes_string
         for key, value in self.props.items():
-            attributes_string += f'{key}="{value}" '
-        return attributes_string.strip()
+            attributes_string += f' {key}="{value}"'
+        return attributes_string
     
     def __repr__(self):
         children_string = ""
@@ -22,7 +22,7 @@ class HTMLNode:
             for child in self.children:
                 children_string += f"{child.value}, "
         children_string = children_string.strip(", ")
-        return f"Tag: {self.tag}, Value: {self.value}, Children: {children_string}, Props: {self.props_to_html()}"
+        return f"Tag: {self.tag}, Value: {self.value}, Children: {children_string}, Props:{self.props_to_html()}"
     
 
 class LeafNode(HTMLNode):
@@ -34,10 +34,9 @@ class LeafNode(HTMLNode):
             raise ValueError("all leaf nodes must have a value")
         if self.tag is None:
             return self.value
-        return f"<{self.tag} {self.props_to_html()}>{self.value}</{self.tag}>" if self.props is not None else f"<{self.tag}>{self.value}</{self.tag}>"
-    
+        return f"<{self.tag}{self.props_to_html()}>{self.value}</{self.tag}>"
     def __repr__(self):
-        return f"Tag: {self.tag}, Value: {self.value}, Props: {self.props_to_html()}"
+        return f"Tag: {self.tag}, Value: {self.value}, Props:{self.props_to_html()}"
     
 
 class ParentNode(HTMLNode):
@@ -55,7 +54,7 @@ class ParentNode(HTMLNode):
                 children_html_string += child.to_html()
             except TypeError:
                 raise ValueError("invalid child")
-        return f"<{self.tag} {self.props_to_html()}>{children_html_string}</{self.tag}>" if self.props is not None else f"<{self.tag}>{children_html_string}</{self.tag}>"
+        return f"<{self.tag}{self.props_to_html()}>{children_html_string}</{self.tag}>"
     
     def __repr__(self):
         children_string = ""
@@ -63,4 +62,4 @@ class ParentNode(HTMLNode):
             for child in self.children:
                 children_string += f"{child.value}, "
         children_string = children_string.strip(", ")
-        return f"Tag: {self.tag}, Children: {children_string}, Props: {self.props_to_html()}"
+        return f"Tag: {self.tag}, Children: {children_string}, Props:{self.props_to_html()}"
