@@ -8,7 +8,7 @@ def get_pure_block_text(block):
     lines = block.split("\n")
     match block_type:
         case BlockType.PARAGRAPH:
-            return block.strip("\n")
+            return block.replace("\n", " ").strip()
         case BlockType.HEADING:
             return block.lstrip("#").strip().strip("\n")
         case BlockType.CODE:
@@ -16,8 +16,8 @@ def get_pure_block_text(block):
         case BlockType.QUOTE:
             quote = ""
             for line in lines:
-                quote += line.lstrip(">").strip() + "\n"
-            return quote.strip("\n")
+                quote += line.lstrip(">").strip() + " "
+            return quote.strip(" ")
         case BlockType.UNORDERED_LIST:
             list = []
             for line in lines:

@@ -27,6 +27,8 @@ class TestGetPureBlockText(unittest.TestCase):
         self.assertEqual(get_pure_block_text(paragraph), paragraph)
         paragraph2 = "This paragraph has a trailing new line.\n"
         self.assertEqual(get_pure_block_text(paragraph2), "This paragraph has a trailing new line.")
+        paragraph3 = "This paragraph\nhas a new line in the middle."
+        self.assertEqual(get_pure_block_text(paragraph3), "This paragraph has a new line in the middle.")
 
     def test_empty_string(self):
         self.assertEqual(get_pure_block_text("# "), "")
@@ -44,7 +46,7 @@ class TestGetPureBlockText(unittest.TestCase):
         quote1 = "> This is a quote."
         quote2 = ">This is also a quote.\n> But longer."
         self.assertEqual(get_pure_block_text(quote1), "This is a quote.")
-        self.assertEqual(get_pure_block_text(quote2), "This is also a quote.\nBut longer.")
+        self.assertEqual(get_pure_block_text(quote2), "This is also a quote. But longer.")
 
 
     def test_code(self):
