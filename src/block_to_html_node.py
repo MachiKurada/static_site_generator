@@ -14,11 +14,11 @@ def block_to_html_node(block):
             n = len(block.split()[0])
             return ParentNode(f"h{n}", children)
         case BlockType.CODE:
-            grandchild = text_node_to_html_node(TextNode(block, TextType.TEXT))
-            child = ParentNode("code", [grandchild])
+            block_text = get_pure_block_text(block)
+            child = text_node_to_html_node(TextNode(block_text, TextType.CODE))
             return ParentNode("pre", [child])
         case BlockType.QUOTE:
-            return ParentNode("quote", children)
+            return ParentNode("blockquote", children)
         case BlockType.UNORDERED_LIST:
             list_children = []
             for i in range(len(children)):
