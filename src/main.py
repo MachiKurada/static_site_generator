@@ -1,8 +1,11 @@
 from textnode import TextNode
+from copy_static_to_public import copy_origin_contents_to_destination
 
+origin = "./static"
+destination = "./public"
 
 def main():
-    text_node = TextNode("This is some anchor text", "link", "https://www.boot.dev")
-    print(text_node)
+    item_paths = copy_origin_contents_to_destination(origin, destination)
+    print(item_paths)
 
 main()
