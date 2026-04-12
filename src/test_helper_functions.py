@@ -1,6 +1,7 @@
 import unittest
 from text_to_children import get_pure_block_text, text_to_children
 from htmlnode import LeafNode
+from generate_page import extract_title
 
 
 
@@ -69,5 +70,45 @@ class TestTextToChildren(unittest.TestCase):
         self.assertListEqual(text_to_children(text1), nodes1)
         self.assertListEqual(text_to_children(text2), nodes2)
         self.assertListEqual(text_to_children(text3), nodes3)
-        
+
+class TestExtractTitle(unittest.TestCase):
+    def test_extract_title(self):
+        md1 = """
+# Header
+
+paragraph
+"""
+        md2 = """
+paragraph
+
+# Header
+
+other paragraph
+"""
+        md3 = """
+paragraph
+
+# Header
+"""
+        md4 = """
+# Header    
+"""
+        title = "Header"
+
+        self.assertEqual(extract_title(md1), title)
+        self.assertEqual(extract_title(md2), title)
+        self.assertEqual(extract_title(md3), title)
+        self.assertEqual(extract_title(md4), title)
+
+    def test_no_valid_title(self):
+        md1 = "paragraph"
+        md2 ="#Wrong header"
+        md3 = "### Not the title"
+        md4 = ""
+
+        with self.assertRaises(Exception):
+            extract_title(md1)
+            extract_title(md2)
+            extract_title(md3)
+            extract_title(md3)
 
