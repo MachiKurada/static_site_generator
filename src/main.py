@@ -9,7 +9,7 @@ content_path = "./content"
 template_path = "./template.html"
 
 def main():
-    if sys.argv[1] != "":
+    if len(sys.argv) > 1 :
         basepath = sys.argv[1]
     else:
         basepath = "/"
