@@ -9,8 +9,8 @@ content_path = "./content"
 template_path = "./template.html"
 
 def main():
-    if sys.argv[0] != "":
-        basepath = sys.argv[0]
+    if sys.argv[1] != "":
+        basepath = sys.argv[1]
     else:
         basepath = "/"
     copy_origin_contents_to_destination(origin, destination)
